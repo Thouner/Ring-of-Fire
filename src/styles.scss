@@ -1,1 +1,25 @@
-/* You can add global styles to this file, and also import other style files */
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Russo One', sans-serif;
+}
+
+
+/* bungee-regular - latin */
+
+@font-face {
+    font-family: 'Bungee';
+    font-style: normal;
+    font-weight: 400;
+    src: url('../fonts/bungee-v11-latin-regular.eot');
+    /* IE9 Compat Modes */
+    src: local(''), url('../fonts/bungee-v11-latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    url('../fonts/bungee-v11-latin-regular.woff2') format('woff2'), /* Super Modern Browsers */
+    url('../fonts/bungee-v11-latin-regular.woff') format('woff'), /* Modern Browsers */
+    url('../fonts/bungee-v11-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
+    url('../fonts/bungee-v11-latin-regular.svg#Bungee') format('svg');
+    /* Legacy iOS */
+}
