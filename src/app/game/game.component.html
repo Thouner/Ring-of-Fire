@@ -1,1 +1,25 @@
-<p>game works!</p>
+<div class="field">
+
+    <img class="rotateBgImg" src="assets/img/gameBG.jpg" alt="">
+
+
+    <div class="circle">
+    </div>
+    <svg>
+  <filter id="wave">
+    <feTurbulence x="0" y="0" baseFrequency="0.009" numOctaves="5" seed="2">
+      <animate attributeName="baseFrequency" dur="60s" values="0.02;0.005;0.02" repeatCount="indefinite"></animate>
+    </feTurbulence>
+    <feDisplacementMap in="SourceGraphic" scale="30"></feDisplacementMap>
+  </filter>
+</svg>
+
+    <div class="cardField">
+        <div class="cartStack">
+            <img [ngStyle]="{'right.px': i * 5, 'top.px': -i * 5}" *ngFor="let cart of [0,1,2,3,4]; let i = index;" src="assets/img/card_cover2.png" alt="">
+            <img (click)="takeCard()" class="topcard" style="right: 25px; top: -25px" src="assets/img/card_cover2.png" alt="">
+            <img (click)="takeCard()" *ngIf="pickCardAniamtion" class="pick-card" style="right: 25px; top: -25px" src="assets/img/carts/ace_1.png" alt="">
+        </div>
+    </div>
+
+</div>
