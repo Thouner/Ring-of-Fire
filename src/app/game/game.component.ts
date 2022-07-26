@@ -32,7 +32,7 @@ export class GameComponent implements OnInit {
   takeCard() {
 
     if (!this.pickCardAniamtion) {
-      // document.documentElement.style.setProperty('$rotateValue', `${this.currentDeg}deg`);
+      document.documentElement.style.setProperty('$rotateValue', `${this.currentDeg}deg`);
       this.currentDeg--;
       console.log(this.currentDeg);
       this.currentCard = this.game.stack.pop();
