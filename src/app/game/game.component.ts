@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Game } from 'src/models/game';
 
 @Component({
@@ -10,8 +10,9 @@ export class GameComponent implements OnInit {
 
   pickCardAniamtion = false;
   currentCard: string = '';
-  game: Game;
 
+  game: Game;
+  currentDeg = -16;
 
   constructor() {
 
@@ -29,8 +30,11 @@ export class GameComponent implements OnInit {
 
 
   takeCard() {
-    if (!this.pickCardAniamtion){
 
+    if (!this.pickCardAniamtion) {
+      document.documentElement.style.setProperty('$rotateValue', `${this.currentDeg}deg`);
+      this.currentDeg--;
+      console.log(this.currentDeg);
       this.currentCard = this.game.stack.pop();
       this.pickCardAniamtion = true;
       setTimeout(() => {
