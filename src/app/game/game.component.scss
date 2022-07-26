@@ -114,12 +114,11 @@ svg {
     }
 }
 
-// $rotateValue: -16deg;
-$rotateValue: var(--dynamic-deg);
-:root {
-    --dynamic-deg: -16deg;
-}
-
+$rotateValue: -16deg;
+// $rotateValue: var(--dynamic-deg);
+// :root {
+//     --dynamic-deg: -16deg;
+// }
 .topcard {
     cursor: pointer;
     transition: all 125ms ease-in-out;
@@ -137,7 +136,7 @@ $rotateValue: var(--dynamic-deg);
 .pick-card {
     transition: all 125ms ease-in-out;
     transform: scale(1.3) translateX(240px) translateY(-120px) rotate($rotateValue);
-    animation: pickCardAnimations 1.5s ease-in-out;
+    animation: pickCardAnimations 1s ease-in-out;
 }
 
 @keyframes pickCardAnimations {
@@ -157,5 +156,22 @@ $rotateValue: var(--dynamic-deg);
     // top: 0;
     left: 0;
     height: 100px;
-    width: 300px;
+    width: 400px;
+}
+
+.btn-add {
+    position: absolute;
+    bottom: 50px;
+    left: 50px;
+}
+
+.info-card {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+mat-card {
+    text-align: center;
 }

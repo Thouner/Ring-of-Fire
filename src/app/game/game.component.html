@@ -16,7 +16,7 @@
 
     <div class="cardField">
 
-        <app-player *ngFor="let player of game.players; let i = index;" [name]="player" [avatar]="(i%4)+ 1 " [ngStyle]="{'top.px': 20 + (i * 120)}" class="playerPosion"></app-player>
+        <app-player *ngFor="let player of game.players; let i = index;" [playerActiv]="i == game.currentPlayer " [name]="player" [avatar]="(i%4)+ 1 " [ngStyle]="{'top.px': 20 + (i * 90)}" class="playerPosion"></app-player>
 
         <div class="cartStack">
             <img [ngStyle]="{'right.px': i * 5, 'top.px': -i * 5}" *ngFor="let card of [0,1,2,3,4]; let i = index;" src="assets/img/card_cover2.png" alt="">
@@ -24,6 +24,14 @@
             <img *ngFor="let card of game.playedCards; let i = index;" [ngStyle]="{'transform': 'rotate('+ -i +'deg) scale(1.3) translateX(240px) translateY(-120px) rotate(-16deg)'}" class="played-card" src="assets/img/newCards/{{ card }}.png" alt="">
             <img (click)="takeCard()" *ngIf="pickCardAniamtion" class="pick-card" style="right: 25px; top: -25px" src="assets/img/newCards/{{ currentCard }}.png" alt="">
         </div>
+
+
+        <button mat-fab color="primary" (click)="openDialog()" class="btn-add">
+          <mat-icon>add</mat-icon>
+        </button>
+
+        <app-game-info class="info-card"></app-game-info>
+
     </div>
 
 </div>
