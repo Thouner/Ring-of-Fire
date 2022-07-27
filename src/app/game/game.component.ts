@@ -37,10 +37,13 @@ export class GameComponent implements OnInit {
     if (!this.pickCardAniamtion) {
       document.documentElement.style.setProperty('$rotateValue', `${this.currentDeg}deg`);
       this.currentDeg--;
-      console.log(this.currentDeg);
+      // console.log(this.currentDeg);
       this.currentCard = this.game.stack.pop();
       this.pickCardAniamtion = true;
       setTimeout(() => {
+      this.game.currentPlayer++;
+      this.game.currentPlayer = this.game.currentPlayer % this.game.players.length ;
+
         this.game.playedCards.push(this.currentCard);
         this.pickCardAniamtion = false;
       }, 1000);

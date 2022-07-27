@@ -114,12 +114,11 @@ svg {
     }
 }
 
-// $rotateValue: -16deg;
-$rotateValue: var(--dynamic-deg);
-:root {
-    --dynamic-deg: -16deg;
-}
-
+$rotateValue: -16deg;
+// $rotateValue: var(--dynamic-deg);
+// :root {
+//     --dynamic-deg: -16deg;
+// }
 .topcard {
     cursor: pointer;
     transition: all 125ms ease-in-out;
