@@ -1,6 +1,6 @@
 <div class="field">
 
-    <img class="rotateBgImg" src="assets/img/gameBG.jpg" alt="">
+
 
 
     <div class="circle">
@@ -16,7 +16,6 @@
 
     <div class="cardField">
 
-        <app-player *ngFor="let player of game.players; let i = index;" [playerActiv]="i == game.currentPlayer " [name]="player" [avatar]="(i%4)+ 1 " [ngStyle]="{'top.px': 20 + (i * 90)}" class="playerPosion"></app-player>
 
         <div class="cartStack">
             <img [ngStyle]="{'right.px': i * 5, 'top.px': -i * 5}" *ngFor="let card of [0,1,2,3,4]; let i = index;" src="assets/img/cardback2.png" alt="">
@@ -25,8 +24,9 @@
             <img (click)="takeCard()" *ngIf="pickCardAniamtion" class="pick-card" style="right: 25px; top: -25px" src="assets/img/newCards/{{ currentCard }}.png" alt="">
         </div>
 
+        <app-player *ngFor="let player of game.players; let i = index;" [playerActiv]="i == game.currentPlayer " [name]="player" [avatar]="(i%4)+ 1 " [ngStyle]="{'top.px': 20 + (i * 90)}" class="playerPosion"></app-player>
 
-        <button mat-fab color="primary" (click)="openDialog()" class="btn-add">
+        <button [disabled]="game.players.length > 5" mat-fab color="" (click)="openDialog()" class="btn-add">
           <mat-icon>add</mat-icon>
         </button>
 

@@ -1,3 +1,18 @@
 mat-card {
     text-align: center;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+@media only screen and (max-width: 500px) {
+    mat-card {
+        width: 260px;
+        height: 90px;
+        overflow: auto;
+    }
+    mat-card-title {
+        font-size: 20px;
+    }
+    mat-card-content {
+        font-size: 12px;
+    }
 }
