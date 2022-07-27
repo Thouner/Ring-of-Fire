@@ -114,11 +114,12 @@ svg {
     }
 }
 
-$rotateValue: -16deg;
-// $rotateValue: var(--dynamic-deg);
-// :root {
-//     --dynamic-deg: -16deg;
-// }
+// $rotateValue: -16deg;
+$rotateValue: var(--dynamic-deg);
+:root {
+    --dynamic-deg: -16deg;
+}
+
 .topcard {
     cursor: pointer;
     transition: all 125ms ease-in-out;
@@ -170,8 +171,4 @@ $rotateValue: -16deg;
     bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
-}
-
-mat-card {
-    text-align: center;
 }
