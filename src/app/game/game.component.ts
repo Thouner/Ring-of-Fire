@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, HostBinding, Input, OnInit } from '@angular/core';
 import { Game } from 'src/models/game';
 import {MatDialog, } from '@angular/material/dialog';
 import { DialogAddPlayerComponent } from '../dialog-add-player/dialog-add-player.component';
@@ -14,9 +14,14 @@ export class GameComponent implements OnInit {
 
   pickCardAniamtion = false;
   currentCard: string = '';
+  currentDeg = -16;
+
 
   game: Game;
-  currentDeg = -16;
+
+
+@HostBinding('style.$rotateValue')
+private rotateValue: any = '-16deg';
 
   constructor(public dialog: MatDialog) {
 
@@ -35,9 +40,11 @@ export class GameComponent implements OnInit {
   takeCard() {
 
     if (!this.pickCardAniamtion) {
-      document.documentElement.style.setProperty('$rotateValue', `${this.currentDeg}deg`);
-      this.currentDeg--;
-      // console.log(this.currentDeg);
+      this.currentDeg --;
+
+      this.rotateValue = this.currentDeg + 'deg';
+      // document.documentElement.style.setProperty('$rotateValue', `${this.rotateValue}`);
+      console.log('rotateValue', this.rotateValue);
       this.currentCard = this.game.stack.pop();
       this.pickCardAniamtion = true;
       setTimeout(() => {
