@@ -21,7 +21,7 @@ export class GameComponent implements OnInit {
 
 
 @HostBinding('style.$rotateValue')
-private rotateValue: any = '-16deg';
+public rotateValue: any = '-16deg';
 
   constructor(public dialog: MatDialog) {
 
