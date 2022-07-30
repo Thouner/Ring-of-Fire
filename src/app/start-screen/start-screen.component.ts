@@ -14,8 +14,7 @@ export class StartScreenComponent implements OnInit {
   }
 
 
-  newGame(){
-    console.log('los gehts');
+  newGame() {
     //start game
     this.router.navigateByUrl('/game');
 

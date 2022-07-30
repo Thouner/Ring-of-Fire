@@ -98,11 +98,6 @@ svg {
     }
 }
 
-$rotateValue: -16deg;
-// $rotateValue: var(--dynamic-deg);
-// :root {
-//     --dynamic-deg: -16deg;
-// }
 .topcard {
     cursor: pointer;
     transition: all 125ms ease-in-out;
@@ -112,14 +107,14 @@ $rotateValue: -16deg;
 }
 
 .played-card {
-    transform: scale(1.3) translateX(240px) translateY(-120px) rotate($rotateValue);
+    transform: scale(1.3) translateX(240px) translateY(-120px) rotate(-16deg);
     right: 25px;
     top: -25px;
 }
 
 .pick-card {
     transition: all 125ms ease-in-out;
-    transform: scale(1.3) translateX(240px) translateY(-120px) rotate($rotateValue);
+    transform: scale(1.3) translateX(240px) translateY(-120px) rotate(-16deg);
     animation: pickCardAnimations 1s ease-in-out;
 }
 
@@ -131,7 +126,7 @@ $rotateValue: -16deg;
         transform: scale(1.6) translateX(60px) translateY(-30px) rotate(-8deg);
     }
     100% {
-        transform: scale(1.3) translateX(240px) translateY(-120px) rotate($rotateValue);
+        transform: scale(1.3) translateX(240px) translateY(-120px) rotate(-16deg);
     }
 }
 
@@ -159,10 +154,10 @@ $rotateValue: -16deg;
 
 @media only screen and (max-width: 1200px) {
     .played-card {
-        transform: scale(1.3) translateX(140px) translateY(-60px) rotate($rotateValue) !important;
+        transform: scale(1.3) translateX(140px) translateY(-60px) rotate(-16deg) !important;
     }
     .pick-card {
-        transform: scale(1.3) translateX(140px) translateY(-60px) rotate($rotateValue) !important;
+        transform: scale(1.3) translateX(140px) translateY(-60px) rotate(-16deg) !important;
         animation: pickCardAnimations140 1s ease-in-out;
     }
     .cartStack {
@@ -180,7 +175,7 @@ $rotateValue: -16deg;
         transform: scale(1.6) translateX(60px) translateY(-30px) rotate(-8deg);
     }
     100% {
-        transform: scale(1.3) translateX(140px) translateY(-60px) rotate($rotateValue);
+        transform: scale(1.3) translateX(140px) translateY(-60px) rotate(-16deg);
     }
 }
 

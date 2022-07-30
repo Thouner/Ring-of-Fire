@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "ringoffirets": {
+      "hosting": {
+        "22.RingOfFire": [
+          "ringoffirets"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "ringoffirets"
+  }
+}

@@ -8,9 +8,22 @@ export class Game {
   constructor() {
     for (let i = 1; i < 52; i++) {
       this.stack.push('card (' + i + ')');
-         }
+    }
     shuffle(this.stack);
   }
+
+
+  public toJason() {
+    return {
+      players: this.players,
+      stack: this.stack,
+      playedCards: this.playedCards,
+      currentPlayer: this.currentPlayer,
+      avatar: this.avatar,
+    };
+  }
+
+
 }
 
 
