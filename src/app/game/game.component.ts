@@ -24,7 +24,7 @@ export class GameComponent implements OnInit {
   gameArray: any;
   gameText: string = '';
 
-  constructor(private route: ActivatedRoute, public dialog: MatDialog, private firestore: Firestore) {
+  constructor(private router: ActivatedRoute, public dialog: MatDialog, private firestore: Firestore) {
     // this.route.params.subscribe((params) => {
     //   console.log(params);
     // });
@@ -32,22 +32,22 @@ export class GameComponent implements OnInit {
     this.games$ = collectionData(coll);
 
     this.games$.subscribe((newGame) => {
-      console.log('was gibts neues', newGame);
+      console.log('was gibts neues', newGame[0].game);
 
-      // this.game.players = newGame.players;
-      // this.game.stack = newGame.stack;
-      // this.game.playedCards = newGame.playedCards;
-      // this.game.currentPlayer = newGame.currentPlayer;
-      // this.game.avatar = newGame.avatar;
+      this.game.players = newGame[0].game.players;
+      this.game.stack = newGame[0].game.stack;
+      this.game.playedCards = newGame[0].game.playedCards;
+      this.game.currentPlayer = newGame[0].game.currentPlayer;
+      this.game.avatar = newGame[0].game.avatar;
 
     });
 
   }
 
-  addNewGame() {
-    const coll = collection(this.firestore, 'games');
-    setDoc(doc(coll, 'b9skAhX0CYOXxyX9wPRE'), { game: this.game.toJason() });
-  }
+  // addNewGame() {
+  //   const coll = collection(this.firestore, 'games');
+  //   setDoc(doc(coll, 'b9skAhX0CYOXxyX9wPRE'), { game: this.game.toJason() });
+  // }
 
   ngOnInit(): void {
     this.newGame();
