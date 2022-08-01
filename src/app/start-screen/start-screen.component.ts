@@ -3,6 +3,7 @@ import { addDoc, doc, Firestore } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import { collection, setDoc } from '@firebase/firestore';
 import { Game } from 'src/models/game';
+// import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 @Component({
   selector: 'app-start-screen',
@@ -20,9 +21,16 @@ export class StartScreenComponent implements OnInit {
   async newGame() {
     //start game
     let game = new Game();
+    // this.firestore
+    //   .collection('game')
+    //   .add(game.toJason())
+    //   .then((gameInfo: any) => {
+    //     console.log(gameInfo);
+
+    // this.router.navigateByUrl('/game/' + gameInfo.id);
+    // });
 
 
-    // const coll = collection(this.firestore, 'games');
     // // setDoc(doc(coll, 'b9skAhX0CYOXxyX9wPRE'), { game: game.toJason() })
     // setDoc(doc(coll), { game: game.toJason() }).then((gameinfo: any) => {
     //     console.log(gameinfo);
@@ -33,13 +41,17 @@ export class StartScreenComponent implements OnInit {
     // this.router.navigateByUrl('/game');
 
 
-    const coll:any = await addDoc(collection(this.firestore, 'games'), {
-    });
-    await setDoc(doc(coll), { game: game.toJason() })
-    // .then((gameinfo: any) => {
-      // console.log(gameinfo);
-      console.log("Document written with ID: ", coll.id);
+    // const docRef:any = await addDoc(collection(this.firestore, 'games'), {
     // });
+    const coll = collection(this.firestore, 'games');
+    console.log("Document written with ID: ", coll);
+
+    await setDoc(doc(coll), { game: game.toJason() }).then((gameinfo: any) => {
+      console.log(gameinfo);
+    });
+
+
+
 
   }
 
