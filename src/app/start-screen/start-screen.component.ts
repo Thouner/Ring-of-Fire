@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { doc, Firestore } from '@angular/fire/firestore';
+import { addDoc, doc, Firestore } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import { collection, setDoc } from '@firebase/firestore';
 import { Game } from 'src/models/game';
@@ -17,20 +17,29 @@ export class StartScreenComponent implements OnInit {
   }
 
 
-  newGame() {
+  async newGame() {
     //start game
     let game = new Game();
 
 
-    const coll = collection(this.firestore, 'games');
-    // setDoc(doc(coll, 'b9skAhX0CYOXxyX9wPRE'), { game: game.toJason() })
-    setDoc(doc(coll), { game: game.toJason() }).then((gameinfo: any) => {
-        console.log(gameinfo);
+    // const coll = collection(this.firestore, 'games');
+    // // setDoc(doc(coll, 'b9skAhX0CYOXxyX9wPRE'), { game: game.toJason() })
+    // setDoc(doc(coll), { game: game.toJason() }).then((gameinfo: any) => {
+    //     console.log(gameinfo);
 
-      });
+    //   });
 
 
     // this.router.navigateByUrl('/game');
+
+
+    const coll:any = await addDoc(collection(this.firestore, 'games'), {
+    });
+    await setDoc(doc(coll), { game: game.toJason() })
+    // .then((gameinfo: any) => {
+      // console.log(gameinfo);
+      console.log("Document written with ID: ", coll.id);
+    // });
 
   }
 
