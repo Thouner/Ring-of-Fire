@@ -3,7 +3,7 @@ import { Game } from 'src/models/game';
 import { MatDialog, } from '@angular/material/dialog';
 import { DialogAddPlayerComponent } from '../dialog-add-player/dialog-add-player.component';
 import { collection } from '@firebase/firestore';
-import { collectionData, doc, Firestore, setDoc } from '@angular/fire/firestore';
+import { addDoc, collectionData, doc, Firestore, setDoc, updateDoc } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 
@@ -23,16 +23,15 @@ export class GameComponent implements OnInit {
   games$: Observable<any>;
   gameArray: any;
   gameText: string = '';
+  gameId: string;
 
   constructor(private router: ActivatedRoute, public dialog: MatDialog, private firestore: Firestore) {
-    // this.route.params.subscribe((params) => {
-    //   console.log(params);
-    // });
+
     const coll = collection(firestore, 'games');
     this.games$ = collectionData(coll);
 
     this.games$.subscribe((newGame) => {
-      console.log('was gibts neues', newGame[0].game);
+      // console.log('was gibts neues', newGame[0].game);
 
       this.game.players = newGame[0].game.players;
       this.game.stack = newGame[0].game.stack;
@@ -44,20 +43,29 @@ export class GameComponent implements OnInit {
 
   }
 
-  // addNewGame() {
-  //   const coll = collection(this.firestore, 'games');
-  //   setDoc(doc(coll, 'b9skAhX0CYOXxyX9wPRE'), { game: this.game.toJason() });
-  // }
+  async saveGame() {
+    const coll: any = collection(this.firestore, 'games');
+
+    await updateDoc(coll, this.gameId, { game: this.game.toJson() });
+    // await setDoc(coll, `${this.gameId}`, { game: this.game.toJson() });
+
+  }
 
   ngOnInit(): void {
     this.newGame();
-    // this.addNewGame();
+
+    this.router.params.subscribe((params) => {
+      this.gameId = params['id'];
+      // console.log('im spiel ', this.gameId);
+    });
   }
 
 
   newGame() {
     this.game = new Game();
+
   }
+
 
 
   takeCard() {

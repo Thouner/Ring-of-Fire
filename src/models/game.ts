@@ -3,7 +3,8 @@ export class Game {
   public stack: string[] = [];
   public playedCards: string[] = [];
   public currentPlayer: number = 0;
-  public avatar = ['player']
+  public avatar = []
+
 
   constructor() {
     for (let i = 1; i < 52; i++) {
@@ -13,7 +14,7 @@ export class Game {
   }
 
 
-  public toJason() {
+  public toJson() {
     return {
       players: this.players,
       stack: this.stack,
