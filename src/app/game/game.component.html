@@ -24,9 +24,11 @@
             <img *ngIf="game.pickCardAniamtion" class="pick-card" style="right: 25px; top: -25px" src="assets/img/newCards/{{ game.currentCard }}.png" alt="">
         </div>
 
-        <app-player *ngFor="let player of game.players; let i = index;" [playerActiv]="i == game.currentPlayer " [name]="player" [avatar]="(i%4)+ 1 " [ngStyle]="{'top.px': 20 + (i * 90)}" class="playerPosion"></app-player>
+        <div class="scroll-player">
+            <app-player *ngFor="let player of game.players; let i = index;" [playerActiv]="i == game.currentPlayer " [name]="player" [avatar]="(i%4)+ 1 " [ngStyle]="{'top.px': 20 + (i * 90)}" class="playerPosion"></app-player>
+        </div>
 
-        <button [disabled]="game.players.length > 5" mat-fab color="" (click)="openDialog()" class="btn-add">
+        <button mat-fab color="" (click)="openDialog()" class="btn-add">
           <mat-icon>add</mat-icon>
         </button>
 
