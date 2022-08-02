@@ -16,19 +16,21 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class GameComponent implements OnInit {
 
-  pickCardAniamtion = false;
-  currentCard: string = '';
+  // pickCardAniamtion = false;
+  // currentCard: string = '';
+
   game: Game;
 
   games$: Observable<any>;
   gameArray: any;
   gameText: string = '';
   gameId: string;
+  coll: any;
 
   constructor(private router: ActivatedRoute, public dialog: MatDialog, private firestore: Firestore) {
 
-    const coll = collection(firestore, 'games');
-    this.games$ = collectionData(coll);
+    this.coll = collection(firestore, 'games');
+    this.games$ = collectionData(this.coll);
 
     this.games$.subscribe((newGame) => {
       // console.log('was gibts neues', newGame[0].game);
@@ -38,17 +40,19 @@ export class GameComponent implements OnInit {
       this.game.playedCards = newGame[0].game.playedCards;
       this.game.currentPlayer = newGame[0].game.currentPlayer;
       this.game.avatar = newGame[0].game.avatar;
+      this.game.pickCardAniamtion = newGame[0].game.pickCardAniamtion;
+      this.game.currentCard = newGame[0].game.currentCard;
 
     });
 
   }
 
   async saveGame() {
-    const coll: any = collection(this.firestore, 'games');
 
-    await updateDoc(coll, this.gameId, { game: this.game.toJson() });
-    // await setDoc(coll, `${this.gameId}`, { game: this.game.toJson() });
 
+    // await updateDoc(this.coll, this.gameId, { game: this.game.toJson() });
+    // await setDoc(this.coll, `${this.gameId}`, { game: this.game.toJson() });
+    setDoc(doc(this.coll, this.gameId), { game: this.game.toJson() });
   }
 
   ngOnInit(): void {
@@ -70,15 +74,17 @@ export class GameComponent implements OnInit {
 
   takeCard() {
 
-    if (!this.pickCardAniamtion) {
-      this.currentCard = this.game.stack.pop();
-      this.pickCardAniamtion = true;
+    if (!this.game.pickCardAniamtion) {
+      this.game.currentCard = this.game.stack.pop();
+      this.game.pickCardAniamtion = true;
+      this.saveGame();
       setTimeout(() => {
         this.game.currentPlayer++;
         this.game.currentPlayer = this.game.currentPlayer % this.game.players.length;
 
-        this.game.playedCards.push(this.currentCard);
-        this.pickCardAniamtion = false;
+        this.game.playedCards.push(this.game.currentCard);
+        this.game.pickCardAniamtion = false;
+        this.saveGame();
       }, 1000);
     }
   }
@@ -92,6 +98,7 @@ export class GameComponent implements OnInit {
     dialogRef.afterClosed().subscribe(name => {
       if (name) {
         this.game.players.push(name);
+        this.saveGame();
       }
 
     });

@@ -12,8 +12,10 @@ import { Game } from 'src/models/game';
 })
 export class StartScreenComponent implements OnInit {
 
-  constructor(private router: Router, private firestore: Firestore) {
+coll:any;
 
+  constructor(private router: Router, private firestore: Firestore) {
+   this.coll = collection(this.firestore, 'games');
   }
 
   ngOnInit(): void {
@@ -25,8 +27,8 @@ export class StartScreenComponent implements OnInit {
     let game = new Game();
 
 
-    const coll: any = collection(this.firestore, 'games');
-    let gameInfo = await addDoc(coll, { game: game.toJson() });
+
+    let gameInfo = await addDoc(this.coll, { game: game.toJson() });
     // console.log("Document written with ID: ", gameInfo.id);
     this.router.navigateByUrl('/game/' + gameInfo.id);
 
