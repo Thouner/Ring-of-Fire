@@ -136,12 +136,19 @@ svg {
     left: 0;
     height: 100px;
     width: 300px;
+    cursor: pointer;
+    &:hover {
+        filter: brightness(1.5);
+    }
 }
 
 .btn-add {
     position: absolute;
     bottom: 50px;
     left: 50px;
+    &:hover {
+        filter: brightness(1.5);
+    }
 }
 
 .info-card {
@@ -172,7 +179,6 @@ svg {
 
 ::-webkit-scrollbar-track {
     box-shadow: inset 0 0 5px rgba($color: #000000, $alpha: 0.6);
-    // background: transparent;
     border-radius: 10px;
 }
 

@@ -25,7 +25,7 @@
         </div>
 
         <div class="scroll-player">
-            <app-player *ngFor="let player of game.players; let i = index;" [playerActiv]="i == game.currentPlayer " [name]="player" [avatar]="(i%4)+ 1 " [ngStyle]="{'top.px': 20 + (i * 90)}" class="playerPosion"></app-player>
+            <app-player (click)="editPlayer(i)" *ngFor="let player of game.players; let i = index;" [playerActiv]="i == game.currentPlayer " [name]="player" [avatar]="(i%4)+ 1 " [ngStyle]="{'top.px': 20 + (i * 90)}" class="playerPosion"></app-player>
         </div>
 
         <button mat-fab color="" (click)="openDialog()" class="btn-add">

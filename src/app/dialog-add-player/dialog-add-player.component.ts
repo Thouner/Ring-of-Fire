@@ -7,12 +7,26 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
   templateUrl: './dialog-add-player.component.html',
   styleUrls: ['./dialog-add-player.component.scss']
 })
+
+
 export class DialogAddPlayerComponent implements OnInit {
+
   name: string = '';
-  constructor(private dialogRef: MatDialogRef<DialogAddPlayerComponent> ) { }
+  avatar: string = '';
+  allProfilePictures: any = [];
+
+
+  constructor(private dialogRef: MatDialogRef<DialogAddPlayerComponent>) {
+    for (let i = 1; i < 9; i++) {
+      this.allProfilePictures.push(`player${i}.png`)
+    }
+  }
+
 
   ngOnInit(): void {
   }
+
+
   onNoClick(): void {
     this.dialogRef.close();
   }

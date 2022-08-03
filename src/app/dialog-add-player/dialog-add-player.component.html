@@ -6,7 +6,24 @@
         <input matInput [(ngModel)]="name">
     </mat-form-field>
 </div>
+
+<div>
+    <!-- <section class="example-section">
+        <div *ngFor="let avatar of this.allProfilePictures; let i = index;" class="checkimg">
+            <img src="assets/img/{{  this.allProfilePictures[i]  }}" alt="">
+            <mat-checkbox class="example-margin"></mat-checkbox>
+        </div>
+    </section> -->
+
+    <label id="example-radio-group-label">Pick your favorite Picture</label>
+    <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group" [(ngModel)]="avatar">
+        <mat-radio-button class="example-radio-button" *ngFor="let avatars of this.allProfilePictures; let i = index;" [value]="avatar">
+            <img src="assets/img/{{  this.allProfilePictures[i]  }}" alt="">
+        </mat-radio-button>
+    </mat-radio-group>
+</div>
+
 <div mat-dialog-actions>
     <button mat-button (click)="onNoClick()">No Thanks</button>
-    <button mat-button [disabled]="name.length == 0" [mat-dialog-close]="name" cdkFocusInitial>Ok</button>
+    <button mat-button [disabled]="name.length == 0" [mat-dialog-close]="avatar" cdkFocusInitial>Ok</button>
 </div>
