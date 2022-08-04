@@ -3,9 +3,10 @@ export class Game {
   public stack: string[] = [];
   public playedCards: string[] = [];
   public currentPlayer: number = 0;
-  public avatar = []
+  public avatar:any = []
   public pickCardAniamtion = false;
   public currentCard: string = '';
+
 
 
   constructor() {
@@ -25,6 +26,7 @@ export class Game {
       avatar: this.avatar,
       pickCardAniamtion: this.pickCardAniamtion,
       currentCard: this.currentCard,
+
     };
   }
 

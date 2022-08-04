@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-edit-player',
@@ -7,17 +8,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EditPlayerComponent implements OnInit {
 
-  allProfilePictures =[];
+  // delete:string = 'delete';
+  avatar: string = '';
+  allProfilePictures: any = [];
 
-  constructor() {
+
+  constructor(private dialogRef: MatDialogRef<EditPlayerComponent>) {
     for (let i = 1; i < 9; i++) {
-        this.allProfilePictures.push(`player${i}.png`)
+      this.allProfilePictures.push(`${i}`)
     }
-    console.log(this.allProfilePictures);
-   }
-
-  ngOnInit(): void {
 
   }
+
+  ngOnInit(): void {
+    console.log();
+
+  }
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
 
 }

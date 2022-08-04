@@ -14,12 +14,14 @@ export class DialogAddPlayerComponent implements OnInit {
   name: string = '';
   avatar: string = '';
   allProfilePictures: any = [];
+  nameAndAvatar: any = [];
 
 
   constructor(private dialogRef: MatDialogRef<DialogAddPlayerComponent>) {
     for (let i = 1; i < 9; i++) {
-      this.allProfilePictures.push(`player${i}.png`)
+      this.allProfilePictures.push(`${i}`)
     }
+
   }
 
 
@@ -29,5 +31,11 @@ export class DialogAddPlayerComponent implements OnInit {
 
   onNoClick(): void {
     this.dialogRef.close();
+  }
+
+
+  mergevalues() {
+    this.nameAndAvatar[0] = (this.name);
+    this.nameAndAvatar[1] = (this.avatar);
   }
 }

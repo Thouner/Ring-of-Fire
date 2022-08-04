@@ -22,6 +22,8 @@ export class GameComponent implements OnInit {
   gameText: string = '';
   gameId: string;
   coll: any;
+  gameOver: boolean = false;
+
 
   constructor(private router: ActivatedRoute, public dialog: MatDialog, private firestore: Firestore) {
     this.coll = collection(firestore, 'games');
@@ -53,25 +55,28 @@ export class GameComponent implements OnInit {
 
   newGame() {
     this.game = new Game();
-
   }
 
 
 
   takeCard() {
-
-    if (!this.game.pickCardAniamtion) {
-      this.game.currentCard = this.game.stack.pop();
-      this.game.pickCardAniamtion = true;
-      this.saveGame();
-      setTimeout(() => {
-        this.game.currentPlayer++;
-        this.game.currentPlayer = this.game.currentPlayer % this.game.players.length;
-
-        this.game.playedCards.push(this.game.currentCard);
-        this.game.pickCardAniamtion = false;
+    if (this.game.players.length > 0) {
+      if (this.game.stack.length == 0) {
+        this.gameOver = true;
+      } else if (!this.game.pickCardAniamtion) {
+        this.game.currentCard = this.game.stack.pop();
+        this.game.pickCardAniamtion = true;
         this.saveGame();
-      }, 1000);
+        setTimeout(() => {
+          this.game.currentPlayer++;
+          this.game.currentPlayer = this.game.currentPlayer % this.game.players.length;
+          this.game.playedCards.push(this.game.currentCard);
+          this.game.pickCardAniamtion = false;
+          this.saveGame();
+        }, 1000);
+      }
+    } else {
+      this.openDialog();
     }
   }
 
@@ -79,26 +84,28 @@ export class GameComponent implements OnInit {
   openDialog(): void {
     const dialogRef = this.dialog.open(DialogAddPlayerComponent, {
     });
-    dialogRef.afterClosed().subscribe(name => {
-      // if (name) {
-      //   this.game.players.push(name);
-      //   this.saveGame();
-      // }
-console.log(name);
-
+    dialogRef.afterClosed().subscribe(nameAndAvatar => {
+      if (nameAndAvatar[0]) {
+        this.game.players.push(nameAndAvatar[0]);
+        this.game.avatar.push(nameAndAvatar[1]);
+        this.saveGame();
+      }
     });
   }
 
 
   editPlayer(playerIndex) {
-    // this.game.players.splice(playerIndex, 1);
-    // this.saveGame();
-
     const dialogRef = this.dialog.open(EditPlayerComponent, {
     });
     dialogRef.afterClosed().subscribe(change => {
-      console.log('changes', change);
-
+      if (change) {
+        this.game.avatar[playerIndex] = change;
+      }
+      if (change == 'delete') {
+        this.game.players.splice(playerIndex, 1);
+        this.game.avatar.splice(playerIndex, 1);
+      }
+      this.saveGame();
     });
 
   }

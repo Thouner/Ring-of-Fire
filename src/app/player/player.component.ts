@@ -7,9 +7,9 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class PlayerComponent implements OnInit {
 
-@Input()name;
-@Input()avatar;
-@Input()playerActiv: boolean = false;
+  @Input() name;
+  @Input() picture = '1';
+  @Input() playerActiv: boolean = false;
 
   constructor() { }
 
