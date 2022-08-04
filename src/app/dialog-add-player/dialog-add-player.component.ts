@@ -29,11 +29,17 @@ export class DialogAddPlayerComponent implements OnInit {
   }
 
 
+  /**
+   * Closing the component without selection
+   */
   onNoClick(): void {
     this.dialogRef.close();
   }
 
 
+  /**
+   * saving the variables in an array
+   */
   mergevalues() {
     this.nameAndAvatar[0] = (this.name);
     this.nameAndAvatar[1] = (this.avatar);

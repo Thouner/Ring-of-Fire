@@ -1,4 +1,4 @@
-<div class="field">
+<div (click)="restart()" class="field">
 
     <!-- burning circle -->
     <div class="circle"></div>
@@ -9,20 +9,11 @@
     </feTurbulence>
     <feDisplacementMap in="SourceGraphic" scale="30"></feDisplacementMap>
     </filter>
-
-<!-- <filter id="wave2">
-          <feTurbulence x="0" y="0" baseFrequency="0.009" numOctaves="5" seed="2">
-            <animate attributeName="baseFrequency" dur="60s" values="0.02;0.005;0.02" repeatCount="indefinite"></animate>
-          </feTurbulence>
-          <feDisplacementMap in="SourceGraphic" scale="{{ playerlevel }}"></feDisplacementMap>
-          </filter> -->
-
   </svg>
 
     <!-- game field -->
     <div *ngIf="!gameOver" class="cardField">
 
-        <!-- <div class="circle2"> -->
         <div class="cartStack">
             <!-- preload image -->
             <img class="preloadImage" src="assets/img/newCards/{{ game.stack[game.stack.length -1] }}.png" alt="">
@@ -35,7 +26,6 @@
             <!-- card animation -->
             <img *ngIf="game.pickCardAniamtion" class="pick-card" style="right: 25px; top: -25px" src="assets/img/newCards/{{ game.currentCard }}.png" alt="">
         </div>
-        <!-- </div> -->
 
         <!-- player container -->
         <div class="scroll-player">
@@ -49,7 +39,6 @@
 
         <!-- game instructions -->
         <app-game-info [card]="game.currentCard" class="info-card"></app-game-info>
-
 
     </div>
 

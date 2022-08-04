@@ -1,5 +1,5 @@
 <h1 mat-dialog-title>Customize your player</h1>
-
+<!-- add player image -->
 <div>
     <label id="example-radio-group-label">Pick your favorite Picture</label>
     <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group" [(ngModel)]="avatar">
@@ -8,7 +8,7 @@
         </mat-radio-button>
     </mat-radio-group>
 </div>
-
+<!-- close component -->
 <div mat-dialog-actions class="buttondirection">
     <button mat-button [disabled]="!avatar" [mat-dialog-close]="avatar" cdkFocusInitial>Ok</button>
     <button mat-button color="warn" [mat-dialog-close]="'delete'" cdkFocusInitial>Delete player</button>
