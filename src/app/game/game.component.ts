@@ -3,9 +3,9 @@ import { Game } from 'src/models/game';
 import { MatDialog, } from '@angular/material/dialog';
 import { DialogAddPlayerComponent } from '../dialog-add-player/dialog-add-player.component';
 import { collection } from '@firebase/firestore';
-import { addDoc, collectionData, doc, Firestore, setDoc, updateDoc } from '@angular/fire/firestore';
+import { addDoc, collectionData, deleteDoc, doc, Firestore, setDoc, updateDoc } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { EditPlayerComponent } from '../edit-player/edit-player.component';
 
 
@@ -25,7 +25,7 @@ export class GameComponent implements OnInit {
   gameOver: boolean = false;
 
 
-  constructor(private router: ActivatedRoute, public dialog: MatDialog, private firestore: Firestore) {
+  constructor(private route: Router, private router: ActivatedRoute, public dialog: MatDialog, private firestore: Firestore) {
     this.coll = collection(firestore, 'games');
     this.games$ = collectionData(this.coll);
     this.games$.subscribe((newGame) => {
@@ -91,6 +91,7 @@ export class GameComponent implements OnInit {
         this.saveGame();
       }
     });
+
   }
 
 
@@ -108,6 +109,12 @@ export class GameComponent implements OnInit {
       this.saveGame();
     });
 
+  }
+
+
+  restart(){
+    this.route.navigateByUrl('');
+    deleteDoc(doc(this.coll, this.gameId));
   }
 
 }

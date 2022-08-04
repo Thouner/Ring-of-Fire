@@ -55,7 +55,7 @@
 
     <!-- game over container -->
     <div *ngIf="gameOver" class="gameoverContainer">
-        <img src="assets/img/game-over.png" alt="">
+        <img (click)="restart()" src="assets/img/game-over.png" alt="">
     </div>
 
 </div>
