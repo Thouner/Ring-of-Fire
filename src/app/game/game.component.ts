@@ -31,13 +31,13 @@ export class GameComponent implements OnInit {
     this.coll = collection(firestore, 'games');
     this.games$ = collectionData(this.coll);
     this.games$.subscribe((newGame) => {
-      this.game.players = newGame[0].game.players;
-      this.game.stack = newGame[0].game.stack;
-      this.game.playedCards = newGame[0].game.playedCards;
-      this.game.currentPlayer = newGame[0].game.currentPlayer;
-      this.game.avatar = newGame[0].game.avatar;
-      this.game.pickCardAniamtion = newGame[0].game.pickCardAniamtion;
-      this.game.currentCard = newGame[0].game.currentCard;
+      this.game.players = newGame.game.players;
+      this.game.stack = newGame.game.stack;
+      this.game.playedCards = newGame.game.playedCards;
+      this.game.currentPlayer = newGame.game.currentPlayer;
+      this.game.avatar = newGame.game.avatar;
+      this.game.pickCardAniamtion = newGame.game.pickCardAniamtion;
+      this.game.currentCard = newGame.game.currentCard;
     });
   }
 
