@@ -1,14 +1,14 @@
 {
   "targets": {
-    "ts-ring-of-fire": {
+    "ts-ringoffire": {
       "hosting": {
         "22.RingOfFire": [
-          "ts-ring-of-fire"
+          "ts-ringoffire"
         ]
       }
     }
   },
   "projects": {
-    "default": "ringoffirets"
+    "default": "ts-ringoffire"
   }
 }

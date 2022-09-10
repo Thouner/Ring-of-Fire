@@ -109,8 +109,8 @@
             "prerender": false,
             "ssr": false,
             "browserTarget": "22.RingOfFire:build:production",
-            "firebaseProject": "ts-ring-of-fire",
-            "firebaseHostingSite": "ts-ring-of-fire"
+            "firebaseProject": "ts-ringoffire",
+            "firebaseHostingSite": "ts-ringoffire"
           }
         }
       }

@@ -89,8 +89,8 @@ export class GameComponent implements OnInit {
       this.gameOver = true;
     } else if (!this.game.pickCardAniamtion) {
       this.cardsAnimation();
+      this.displayNextPlayer();
       setTimeout(() => {
-        this.displayNextPlayer();
       }, 1000);
     }
   }
