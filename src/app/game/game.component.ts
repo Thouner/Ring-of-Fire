@@ -2,8 +2,7 @@ import { Component, HostBinding, Input, OnInit } from '@angular/core';
 import { Game } from 'src/models/game';
 import { MatDialog, } from '@angular/material/dialog';
 import { DialogAddPlayerComponent } from '../dialog-add-player/dialog-add-player.component';
-import { collection } from '@firebase/firestore';
-import { addDoc, collectionData, deleteDoc, doc, Firestore, setDoc, updateDoc } from '@angular/fire/firestore';
+import { deleteDoc, doc, Firestore, onSnapshot, setDoc} from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EditPlayerComponent } from '../edit-player/edit-player.component';
@@ -28,25 +27,17 @@ export class GameComponent implements OnInit {
 
 
   constructor(private route: Router, private router: ActivatedRoute, public dialog: MatDialog, private firestore: Firestore) {
-    this.coll = collection(firestore, 'games');
-    this.games$ = collectionData(this.coll);
-    this.games$.subscribe((newGame) => {
-      this.game.players = newGame.game.players;
-      this.game.stack = newGame.game.stack;
-      this.game.playedCards = newGame.game.playedCards;
-      this.game.currentPlayer = newGame.game.currentPlayer;
-      this.game.avatar = newGame.game.avatar;
-      this.game.pickCardAniamtion = newGame.game.pickCardAniamtion;
-      this.game.currentCard = newGame.game.currentCard;
-    });
-  }
-
-
-  /**
-   * save the game on firebase
-   */
-  saveGame() {
-    setDoc(doc(this.coll, this.gameId), { game: this.game.toJson() });
+    // this.coll = collection(firestore, 'games');
+    // this.games$ = collectionData(this.coll);
+    // this.games$.subscribe((newGame) => {
+    // this.game.players = newGame.game.players;
+    // this.game.stack = newGame.game.stack;
+    // this.game.playedCards = newGame.game.playedCards;
+    // this.game.currentPlayer = newGame.game.currentPlayer;
+    // this.game.avatar = newGame.game.avatar;
+    // this.game.pickCardAniamtion = newGame.game.pickCardAniamtion;
+    // this.game.currentCard = newGame.game.currentCard;
+    // });
   }
 
 
@@ -55,9 +46,38 @@ export class GameComponent implements OnInit {
    */
   ngOnInit(): void {
     this.newGame();
-    this.router.params.subscribe((params) => {
+
+    this.router.params.subscribe(async (params) => {
       this.gameId = params['id'];
-    });
+      onSnapshot(doc(this.firestore, "games", params['id']), (doc) => {
+        const newGame: any = doc.data();
+        console.log(newGame);
+
+
+        this.updateGameData(newGame);
+      });
+    })
+  }
+
+
+
+  updateGameData(newGame: any) {
+
+    this.game.players = newGame.players;
+    this.game.stack = newGame.stack;
+    this.game.playedCards = newGame.playedCards;
+    this.game.currentPlayer = newGame.currentPlayer;
+    this.game.avatar = newGame.avatar;
+    this.game.pickCardAniamtion = newGame.pickCardAniamtion;
+    this.game.currentCard = newGame.currentCard;
+  }
+
+
+  /**
+   * save the game on firebase
+   */
+  saveGame() {
+    setDoc(doc(this.coll, this.gameId), { game: this.game.toJson() });
   }
 
 
