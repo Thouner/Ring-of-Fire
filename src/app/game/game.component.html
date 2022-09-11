@@ -16,7 +16,7 @@
 
         <div class="cartStack">
             <!-- preload image -->
-            <!-- <img class="preloadImage" src="assets/img/newCards/{{ game.stack[game.stack.length -1] }}.png" alt=""> -->
+            <img class="preloadImage" src="assets/img/newCards/{{ game.stack[game.stack.length -1] }}.png" alt="">
             <!-- card stack   -->
             <img [ngStyle]="{'right.px': i * 5, 'top.px': -i * 5}" *ngFor="let card of [0,1,2,3,4]; let i = index;" src="assets/img/cardback2.png" alt="">
             <!-- first card -->
