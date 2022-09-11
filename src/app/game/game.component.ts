@@ -30,22 +30,7 @@ export class GameComponent implements OnInit {
 
   constructor(private route: Router, private router: ActivatedRoute, public dialog: MatDialog, private firestore: Firestore) {
     this.coll = collection(this.firestore, 'games');
-    // this.games$ = collectionData(this.coll, {
-    //   idField: 'id',
-    // }) as Observable<any>;
-
-    // this.games$.subscribe((newGame) => {
-    //   console.log(newGame);
-    // });
-      // this.game.players = newGame.game.players;
-    // this.game.stack = newGame.game.stack;
-    // this.game.playedCards = newGame.game.playedCards;
-    // this.game.currentPlayer = newGame.game.currentPlayer;
-    // this.game.avatar = newGame.game.avatar;
-    // this.game.pickCardAniamtion = newGame.game.pickCardAniamtion;
-    // this.game.currentCard = newGame.game.currentCard;
-    // });
-  }
+    }
 
 
   /**
@@ -55,55 +40,29 @@ export class GameComponent implements OnInit {
     this.newGame();
     this.router.params.subscribe(async (params) => {
       this.gameId = params['id'];
-
-
-      // this.games$ = collectionData(this.gameById, {
-      //   idField: 'id',
-      // }) as Observable<any>;
-
-      // this.games$.subscribe((newGame) => {
-      //   console.log(newGame);
-      // });
-
-        onSnapshot(doc(this.firestore, "games", params['id']), (doc) => {
-          const newGame: any = doc.data();
-          console.log(newGame);
-
-
-          this.updateGameData(newGame);
-        });
-
-
+      onSnapshot(doc(this.firestore, "games", params['id']), (doc) => {
+        const newGame: any = doc.data();
+        // console.log(newGame);
+        this.updateGameData(newGame);
+      });
     })
-
-
-
   }
 
 
   /**
    * save the game in a variable
    */
-   newGame() {
+  newGame() {
     this.game = new Game();
   }
 
 
-  async loadGame() {
-
-    const gameReference = doc(this.firestore, `games/${this.gameId}`);
-    this.gameById = setDoc(gameReference, { idField: 'id' });
-
-    // this.coll = doc(this.firestore, `games/${this.gameId}`);
-    // const querySnapshot = await getDoc(this.coll);
-    // this.gameById = querySnapshot.data();
-    // console.log(this.gameById);
-
-  }
-
-
+  /**
+   * updates the game variable
+   *
+   * @param newGame - data loaded from firebase
+   */
   updateGameData(newGame: any) {
-
     this.game.players = newGame.game.players;
     this.game.stack = newGame.game.stack;
     this.game.playedCards = newGame.game.playedCards;
