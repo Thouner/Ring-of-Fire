@@ -28,6 +28,9 @@ export class GameComponent implements OnInit {
   gameById: any;
 
 
+  /**
+   * loading the games from firebase
+   */
   constructor(private route: Router, private router: ActivatedRoute, public dialog: MatDialog, private firestore: Firestore) {
     this.coll = collection(this.firestore, 'games');
     }
