@@ -33,7 +33,7 @@ export class GameComponent implements OnInit {
    */
   constructor(private route: Router, private router: ActivatedRoute, public dialog: MatDialog, private firestore: Firestore) {
     this.coll = collection(this.firestore, 'games');
-    }
+  }
 
 
   /**
@@ -105,8 +105,6 @@ export class GameComponent implements OnInit {
     } else if (!this.game.pickCardAniamtion) {
       this.cardsAnimation();
       this.displayNextPlayer();
-      setTimeout(() => {
-      }, 1000);
     }
   }
 
@@ -127,9 +125,12 @@ export class GameComponent implements OnInit {
   displayNextPlayer() {
     this.game.currentPlayer++;
     this.game.currentPlayer = this.game.currentPlayer % this.game.players.length;
-    this.game.playedCards.push(this.game.currentCard);
-    this.game.pickCardAniamtion = false;
     this.saveGame();
+    setTimeout(() => {
+      this.game.playedCards.push(this.game.currentCard);
+      this.game.pickCardAniamtion = false;
+      this.saveGame();
+    }, 1000);
   }
 
 

@@ -1,50 +1,56 @@
 <div (click)="restart()" class="field">
 
-    <!-- burning circle -->
-    <div class="circle"></div>
-    <svg>
+  <!-- burning circle -->
+  <div class="circle"></div>
+  <svg>
     <filter id="wave">
-    <feTurbulence x="0" y="0" baseFrequency="0.009" numOctaves="5" seed="2">
-      <animate attributeName="baseFrequency" dur="60s" values="0.02;0.005;0.02" repeatCount="indefinite"></animate>
-    </feTurbulence>
-    <feDisplacementMap in="SourceGraphic" scale="30"></feDisplacementMap>
+      <feTurbulence x="0" y="0" baseFrequency="0.009" numOctaves="5" seed="2">
+        <animate attributeName="baseFrequency" dur="60s" values="0.02;0.005;0.02" repeatCount="indefinite"></animate>
+      </feTurbulence>
+      <feDisplacementMap in="SourceGraphic" scale="30"></feDisplacementMap>
     </filter>
   </svg>
 
-    <!-- game field -->
-    <div *ngIf="!gameOver" class="cardField">
+  <!-- game field -->
+  <div *ngIf="!gameOver" class="cardField">
 
-        <div class="cartStack">
-            <!-- preload image -->
-            <img class="preloadImage" src="assets/img/newCards/{{ game.stack[game.stack.length -1] }}.png" alt="">
-            <!-- card stack   -->
-            <img [ngStyle]="{'right.px': i * 5, 'top.px': -i * 5}" *ngFor="let card of [0,1,2,3,4]; let i = index;" src="assets/img/cardback2.png" alt="">
-            <!-- first card -->
-            <img (click)="takeCard()" class="topcard" style="right: 25px; top: -25px" src="assets/img/cardback2.png" alt="">
-            <!-- stack for played cards -->
-            <img *ngFor="let card of game.playedCards; let i = index;" [ngStyle]="{'transform': 'scale(1.3) translateX(240px) translateY(-120px) rotate(-16deg)'}" class="played-card" src="assets/img/newCards/{{ card }}.png" alt="">
-            <!-- card animation -->
-            <img *ngIf="game.pickCardAniamtion" class="pick-card" style="right: 25px; top: -25px" src="assets/img/newCards/{{ game.currentCard }}.png" alt="">
-        </div>
-
-        <!-- player container -->
-        <div class="scroll-player">
-            <app-player (click)="editPlayer(i)" *ngFor="let player of game.players; let i = index;" [playerActiv]="i == game.currentPlayer " [name]="player" [picture]="game.avatar[i]" [ngStyle]="{'top.px': 20 + (i * 90)}" class="playerPosion"></app-player>
-        </div>
-
-        <!-- add player -->
-        <button mat-fab color="" (click)="openDialog()" class="btn-add">
-              <mat-icon>add</mat-icon>
-            </button>
-
-        <!-- game instructions -->
-        <app-game-info [card]="game.currentCard" class="info-card"></app-game-info>
-
+    <div class="cartStack">
+      <!-- preload image -->
+      <img class="preloadImage" src="assets/img/newCards/{{ game.stack[game.stack.length -1] }}.png" alt="">
+      <!-- card stack   -->
+      <img [ngStyle]="{'right.px': i * 5, 'top.px': -i * 5}" *ngFor="let card of [0,1,2,3,4]; let i = index;"
+        src="assets/img/cardback2.png" alt="">
+      <!-- first card -->
+      <img (click)="takeCard()" class="topcard" style="right: 25px; top: -25px" src="assets/img/cardback2.png" alt="">
+      <!-- stack for played cards -->
+      <img *ngFor="let card of game.playedCards; let i = index;"
+        [ngStyle]="{'transform': 'scale(1.3) translateX(240px) translateY(-120px) rotate(-16deg)'}" class="played-card"
+        src="assets/img/newCards/{{ card }}.png" alt="">
+      <!-- card animation -->
+      <img *ngIf="game.pickCardAniamtion" class="pick-card" style="right: 25px; top: -25px"
+        src="assets/img/newCards/{{ game.currentCard }}.png" alt="">
     </div>
 
-    <!-- game over container -->
-    <div *ngIf="gameOver" class="gameoverContainer">
-        <img (click)="restart()" src="assets/img/game-over.png" alt="">
+    <!-- player container -->
+    <div class="scroll-player">
+      <app-player (click)="editPlayer(i)" *ngFor="let player of game.players; let i = index;"
+        [playerActiv]="i == game.currentPlayer " [name]="player" [picture]="game.avatar[i]"
+        [ngStyle]="{'top.px': 20 + (i * 90)}" class="playerPosion"></app-player>
     </div>
+
+    <!-- add player -->
+    <button mat-fab color="" (click)="openDialog()" class="btn-add">
+      <mat-icon>add</mat-icon>
+    </button>
+
+    <!-- game instructions -->
+    <app-game-info [card]="game.currentCard" class="info-card"></app-game-info>
+
+  </div>
+
+  <!-- game over container -->
+  <div *ngIf="gameOver" class="gameoverContainer">
+    <img (click)="restart()" src="assets/img/game-over.png" alt="">
+  </div>
 
 </div>
